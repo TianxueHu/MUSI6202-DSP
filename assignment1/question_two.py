@@ -15,7 +15,7 @@ def findSnarePosition(snareFilename, drumloopFilename):
     drum = loadSoundFile(drumloopFilename)
 
     z = crossCorr(drum, snare)
-    peak_indices = find_peaks(z, threshold = 50)
+    peak_indices = find_peaks(z, threshold = 0.2)
 
     ## find position in drum loop file (in seconds)
     # total duration of drum loop file in seconds
@@ -26,7 +26,7 @@ def findSnarePosition(snareFilename, drumloopFilename):
     snare_length = snare.shape[0]
     drum_length = drum.shape[0]
     for idx in peak_indices[0]:
-        sec = duration * (idx-snare_length) / drum_length
+        sec = duration * (idx-snare_length+1) / drum_length
         output.append(sec)
 
     return output 
@@ -40,9 +40,10 @@ if __name__ == '__main__':
     snareFile_path = os.path.join(cur_dir, snareFile)
 
     snare_location = findSnarePosition(snareFile_path, drumloopFile_path)
-    '''
+    
     # write file 
-    with open('02-snareLocation.txt', 'w') as f:
+    with open('results/02-snareLocation.txt', 'w') as f:
         for item in  snare_location:
             f.write("%s\n" % item)
-    '''
+    
+    

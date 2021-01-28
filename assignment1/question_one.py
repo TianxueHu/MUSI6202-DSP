@@ -12,8 +12,9 @@ def crossCorr(x, y):
     input: x,y as numpy arrays
     output: an array
     '''
-
-    return correlate(x, y, "full") 
+    z = correlate(x, y, "full") 
+    z /= np.max(z)
+    return z
 
 
 def loadSoundFile(filename):
@@ -57,9 +58,13 @@ if __name__ == '__main__':
 
     z = crossCorr(drum, snare)
     
-    '''
-    plt.plot(z)
-    plt.show()
-    #plt.savefig("01-correlation.png")
-    '''
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    ax.plot(z)
+    ax.set_title("Cross-Correlated Signal")
+    ax.set_xlabel("Sample Number")
+    #plt.show()
+    #plt.savefig("results/01-correlation.png", format = "png")
+
+    
     
