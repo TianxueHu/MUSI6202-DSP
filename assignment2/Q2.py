@@ -4,10 +4,23 @@ from scipy.io.wavfile import read as wavread
 import numpy as np
 import os
 from Q1 import myTimeConv
+import time
 
 
 def CompareConv(x, h):
-    return convolve(x, h)
+ 
+    start = time.process_time()
+    y_my = myTimeConv(x, h)
+    end_my = time.process_time()
+    y_sci = convolve(x, h)
+    end_sci = time.process_time()
+    time = [end_my - start, end_sci - end_my]
+
+
+    m = np.mean(y_my[:, None] - y_sci)
+    mabs = np.mean(np.abs(y_my[:, None] - y_sci))
+    stdev = np.std(y_my[:, None] - y_sci)
+    return m, mabs, stdev, np.asarray(time)
 
 
 
@@ -53,8 +66,4 @@ if __name__ == '__main__':
     x = loadSoundFile(xpp)
     h = loadSoundFile(hpp)
 
-    y1 = myTimeConv(x, h)
-    print(y1)
-
-    y2 = CompareConv(x, h)
-    print(y2)
+    m, mabs, stdev, time = CompareConv(x, h)
