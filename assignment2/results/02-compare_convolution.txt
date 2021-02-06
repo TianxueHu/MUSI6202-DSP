@@ -1,0 +1,4 @@
+Mean value: 4.697876343472989e-19
+Mean absolute value: 2.8824183336183117e-16
+Standard deviation: 3.777070120426467e-16
+Time [my_function, scipy_function[]: [2.5521028  0.00958109]

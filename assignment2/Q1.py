@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 '''
-Q1-2 Answer: If the length of 'x' is 200 and the length of 'h' is 100, y is of length 300
+Q1-2 Answer: If the length of 'x' is 200 and the length of 'h' is 100, y is of length 200 + 100 - 1 = 299
 '''
 
 def myTimeConv(x, h):
@@ -14,20 +14,19 @@ def myTimeConv(x, h):
     '''
     nh = h.shape[0]
     nx = x.shape[0]
-    npad = nh//2
-    pad = np.zeros((npad))
-    x_pad = np.hstack([pad, x, pad])
 
-    y = []
-    A = [] 
-    for n in range(nx):
-        x_tmp= x_pad[n:n+nh]
-        A.append(x_tmp)
-        #y.append(list(x_tmp*h[::-1]))
-        y.append(list(x_tmp*h))
-    y = np.array(y)
-    y = y.sum(1)
-    return y
+    # init convolve output
+    ny = nx + nh -1
+    y = np.zeros(ny)
+    # flip the impulse
+    h = np.flip(h) 
+    # pad signal
+    x = np.pad(x, nh-1)
+    
+    for n in range(ny):
+        y[n] = np.sum(np.dot(h, x[n:n+nh]))
+
+    return y 
 
 
 
@@ -42,13 +41,12 @@ if __name__ == '__main__':
         h.append((25-i)*1/25)
     h = np.asarray(h)
 
-    print(np.convolve(x,h))
     y = myTimeConv(x,h)
-    print(y)
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
     ax.plot(y)
     ax.set_title("Convolution of 2 Signals")
     ax.set_xlabel("time")
     ax.set_ylabel("amplitude")
-    plt.show()
+    #plt.show()
+    #plt.savefig("results/02-convolution.png", format = "png")
