@@ -1,4 +1,4 @@
 Mean value: 4.697876343472989e-19
 Mean absolute value: 2.8824183336183117e-16
 Standard deviation: 3.777070120426467e-16
-My function time: 2.74868106842041. Scipy function time: 0.009499073028564453
+My function time: 2.8633909225463867s. Scipy function time: 0.00978398323059082s.

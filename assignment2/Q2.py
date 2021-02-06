@@ -71,6 +71,6 @@ if __name__ == '__main__':
         f.writelines(["Mean value: " + str(m) + "\n",
                 "Mean absolute value: " + str(mabs) + "\n",
                 "Standard deviation: " + str(stdev) + "\n",
-                "My function time: " + str(time[0]) + ". Scipy function time: " + str(time[1])
+                "My function time: " + str(time[0]) + "s. Scipy function time: " + str(time[1]) + "s."
         ])
             
