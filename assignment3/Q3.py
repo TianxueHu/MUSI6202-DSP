@@ -39,7 +39,7 @@ if __name__ == '__main__':
     ax.plot(sin_f, sin_x_phase)
     ax.set_xlabel("Frequency in Hz")
     ax.set_ylabel("Phase")
-    #plt.show()
+    plt.show()
     #plt.savefig('results/q3-sinwave_magphase.png')
 
     fig = plt.figure()

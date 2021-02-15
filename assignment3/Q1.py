@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def generateSinusoidal(amplitude, sampling_rate_Hz, frequency_Hz, length_secs, phase_radians):
     samples = int(sampling_rate_Hz * length_secs)
     t = np.arange(0, (samples+1)/sampling_rate_Hz, 1/sampling_rate_Hz)
-    t = t[:-1] # remove end point
+    #t = t[:-1] # remove end point
     x = amplitude * np.sin(2 * np.pi * frequency_Hz * t + phase_radians)
     return t, x 
 
