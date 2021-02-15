@@ -1,0 +1,8 @@
+Q3.4
+Frequency resolution is sample rate / length of fft bins
+In the implementation, the sample rate is 44100 Hz and number of bins is 22050
+Frequency resolution = 44100/22050 = 2Hz/bin
+
+Q3.5
+Add zero paddings to to the time domain will increase length of fft bins,
+taking the same sample rate will cause frequency resolution smaller.
