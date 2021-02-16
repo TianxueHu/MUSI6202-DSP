@@ -21,15 +21,18 @@ def generateBlocks(x, sample_rate_Hz, block_size, hop_size):
 
 
 def mySpecgram(x, block_size, hop_size, sampling_rate_Hz, window_type):
-    time_vector, X = generateBlocks(x, sampling_rate_Hz, block_size, hop_size)
-    print(X.shape)
-
     if window_type == "hann":
-        window = np.hanning(block_size).reshape(block_size, 1)
-        print(window.shape)
-        X = X * window
-    
-    
+        window = np.hanning(block_size)xw
+    elif  window_type == "rect":
+        window = np.ones(block_size)
+
+    magnitude_spectrogram, freq_vector, time_vector, im =  plt.specgram(x, Fs = sampling_rate_Hz,\
+         NFFT = block_size, noverlap = block_size - hop_size, window = window)
+    plt.title(f"Magnitude Spectrogram with {window_type} window") 
+    plt.xlabel("Time in secs")
+    plt.ylabel("Frequency")
+    #plt.show()
+    plt.savefig(f'results/q4-{window_type}.png')
     return freq_vector, time_vector, magnitude_spectrogram
     
 
@@ -39,5 +42,6 @@ if __name__ == '__main__':
     t_sq, x_sq = generateSquare(amplitude=1.0, sampling_rate_Hz = 44100, \
         frequency_Hz=400, length_secs=0.5, phase_radians=0)
 
-    mySpecgram(x_sq, block_size=2048, hop_size=1024, sampling_rate_Hz=44100, window_type='rect')
     mySpecgram(x_sq, block_size=2048, hop_size=1024, sampling_rate_Hz=44100, window_type='hann')
+    mySpecgram(x_sq, block_size=2048, hop_size=1024, sampling_rate_Hz=44100, window_type='rect')
+    
