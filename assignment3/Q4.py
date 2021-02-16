@@ -22,7 +22,7 @@ def generateBlocks(x, sample_rate_Hz, block_size, hop_size):
 
 def mySpecgram(x, block_size, hop_size, sampling_rate_Hz, window_type):
     if window_type == "hann":
-        window = np.hanning(block_size)xw
+        window = np.hanning(block_size)
     elif  window_type == "rect":
         window = np.ones(block_size)
 
