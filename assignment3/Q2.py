@@ -27,4 +27,4 @@ if __name__ == '__main__':
     ax.set_xlabel("Time in secs")
     ax.set_ylabel("Amplitude")
     #plt.show()
-    #plt.savefig('results/q2-generateSquare.png')
+    plt.savefig('results/q2-generateSquare.png')
