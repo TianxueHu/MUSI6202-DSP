@@ -11,13 +11,14 @@ def computeSpectrum(x, sample_rate_Hz):
 
     # get length of the non-repeated part
     spec_len = spectrum.shape[0]
-    half_len = int(spec_len/2)
+    half_len = spec_len//2
    
     f = fftfreq(spectrum.shape[0], 1/sample_rate_Hz)[:half_len]
-    XAbs = np.abs(spectrum[:half_len])
-    XPhase = np.angle(spectrum[:half_len])
-    XRe = spectrum[:half_len].real
-    XIm = spectrum[:half_len].imag
+    half_spec = spectrum[:half_len]
+    XAbs = np.abs(half_spec)
+    XPhase = np.angle(half_spec)
+    XRe = half_spec.real
+    XIm = half_spec.imag
     return f, XAbs, XPhase, XRe, XIm
 
 
@@ -52,5 +53,5 @@ if __name__ == '__main__':
     ax.plot(sq_f, sq_x_phase)
     ax.set_xlabel("Frequency in Hz")
     ax.set_ylabel("Phase")
-    #plt.show()
+    plt.show()
     #plt.savefig('results/q3-squarewave_magphase.png')

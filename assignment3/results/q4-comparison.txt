@@ -1,0 +1,2 @@
+The frequency lines under 7500Hz using rectangular window looks blurred than the one using hanning window.
+It looks like applying a rectangular window has more spectral leakage vs. applying a hanning window, causing some frequencies of signals to be lost in the leakage.

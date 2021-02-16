@@ -8,14 +8,15 @@ import matplotlib.pyplot as plt
 def generateBlocks(x, sample_rate_Hz, block_size, hop_size):
     numBlocks = int(np.ceil(x.shape[0] / hop_size))
     X = np.zeros([numBlocks, block_size])
-    t = (np.arange(0, numBlocks) * hop_size) / sample_rate_Hz
-
+    # padding
     x = np.concatenate((x, np.zeros(block_size)),axis=0)
 
+    t = (np.arange(0, numBlocks) * hop_size) / sample_rate_Hz
+
     for n in range(0, numBlocks):
-        i_start = n * hop_size
-        i_stop = np.min([x.size - 1, i_start + block_size - 1])
-        X[n][np.arange(0,block_size)] = x[np.arange(i_start, i_stop + 1)]
+        start = n * hop_size
+        stop = np.min([x.size - 1, start + block_size - 1])
+        X[n][np.arange(0,block_size)] = x[np.arange(start, stop + 1)]
     X = np.transpose(X)
     return t, X
 
