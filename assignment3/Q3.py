@@ -13,7 +13,11 @@ def computeSpectrum(x, sample_rate_Hz):
     spec_len = spectrum.shape[0]
     half_len = spec_len//2
    
-    f = fftfreq(spectrum.shape[0], 1/sample_rate_Hz)[:half_len]
+    val = 1.0 / spec_len * sample_rate_Hz
+    N = (spec_len-1)//2 
+    f = np.arange(0, N, dtype=int)
+    f = f * val
+
     half_spec = spectrum[:half_len]
     XAbs = np.abs(half_spec)
     XPhase = np.angle(half_spec)

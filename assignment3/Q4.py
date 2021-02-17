@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 
 
 def generateBlocks(x, sample_rate_Hz, block_size, hop_size):
-    numBlocks = int(np.ceil(x.shape[0] / hop_size))
+    numBlocks = int(np.ceil(x.shape[0]/hop_size))
     X = np.zeros([numBlocks, block_size])
     # padding
-    x = np.concatenate((x, np.zeros(block_size)),axis=0)
+    x = np.concatenate((x, np.zeros(block_size)), axis=0)
 
-    t = (np.arange(0, numBlocks) * hop_size) / sample_rate_Hz
+    t = np.arange(0, numBlocks) * hop_size / sample_rate_Hz
 
     for n in range(0, numBlocks):
         start = n * hop_size
@@ -27,7 +27,7 @@ def mySpecgram(x, block_size, hop_size, sampling_rate_Hz, window_type):
     elif  window_type == "rect":
         window = np.ones(block_size)
 
-    magnitude_spectrogram, freq_vector, time_vector, im =  plt.specgram(x, Fs = sampling_rate_Hz,\
+    magnitude_spectrogram, freq_vector, time_vector, im = plt.specgram(x, Fs = sampling_rate_Hz,\
          NFFT = block_size, noverlap = block_size - hop_size, window = window)
     plt.title(f"Magnitude Spectrogram with {window_type} window") 
     plt.xlabel("Time in secs")
